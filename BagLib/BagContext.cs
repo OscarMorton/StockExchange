@@ -11,8 +11,8 @@ namespace BagLib
 {
     public partial class BagContext : DbContext
     {
-        private readonly string LOG = "D:\\Capgemini\\Bootcamp\\CURSO_NET_AVANZADO\\BagMVC\\LOG.txt";
-        private readonly StreamWriter _logStream;
+        //private readonly string LOG = "D:\\Capgemini\\Bootcamp\\CURSO_NET_AVANZADO\\BagMVC\\LOG.txt";
+        //private readonly StreamWriter _logStream;
 
         public DbSet<Country> Country { get; set; }
 
@@ -29,7 +29,7 @@ namespace BagLib
         public BagContext(DbContextOptions<BagContext> options) : base(options)
         {
             
-            _logStream = new StreamWriter(LOG, append: true);
+            //_logStream = new StreamWriter(LOG, append: true);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -37,7 +37,7 @@ namespace BagLib
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-                    .LogTo(_logStream.WriteLine)
+                    //.LogTo(_logStream.WriteLine)
                     .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=BagContextFinal;Trusted_Connection=True;");
             }
         }
