@@ -1,39 +1,60 @@
-# Título del Proyecto
+# STOCK EXCHANGE PROJECT
 
 _Acá va un párrafo que describa lo que es el proyecto_
 
 ## Comenzando 🚀
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+Después de haber clonado con éxito el repositorio y haber abierto la solución en Visual Studio, se deberán seguir los siguientes pasos:
+### 1. Modificar la url de la base de datos local.
 
-Mira **Deployment** para conocer como desplegar el proyecto.
-
-
-### Pre-requisitos 📋
-
-_Que cosas necesitas para instalar el software y como instalarlas_
-
+Para ello se debe modificar el string de conexión a la base de datos local en el archivo "BagMVC/appsettings.json" de la siguiente forma:
 ```
-Da un ejemplo
+"ConnectionStrings": {
+    "BagContext": "Server=(localdb)\\mssqllocaldb;Database=BagContextFinal;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
 ```
 
-### Instalación 🔧
+### 2. Actualizar la base de datos con los modelos de datos de BagLib
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
 
-_Dí cómo será ese paso_
+En la "Consola del Administrador de paquetes" seleccionando el proyecto BagLib y ejecutando el comando "update-database" se consigue generar las tablas de la base de datos segun las migraciones correspondientes:
+```
+Versión de host 6.0.0.275 de la Consola del Administrador de paquetes
+
+Escriba 'get-help NuGet' para ver todos los comandos de NuGet disponibles.
+
+PM> update-database
+Build started...
+Build succeeded.
+Done.
+```
+
+### 3. Incluir la clave de la Api de AlphaVantage 🔧
+
+En la web de "https://www.alphavantage.co/" deberemos solicitar una clave gratuita e incluirla en el archivo "secrets.json" de la siguiente forma:
+
+Para acceder a los secretos: Right click sobre el proyecto BAGMVC -> Administrar secretos del usuario -> Incluir lo siguiente
+```
+  "ApiKeys": {
+    "Stocks":"APIKEY"
+  } 
+```
+### 4. Crear un usuario en la base de datos 🔧
+
+Utilizando Microsoft SQL Server Management Studio se debe crear un usuario con id = 1, si no esta mierda no funciona :/
+
+### 5. Poblar la base de datos con los Countries y las Currencies 🔧
+
+Para poder tener los datos de los paises y las monedas, se deben poblar estas tablas. Para ello, lanzamos la aplicación y en la View de Countries, pulsamos sobre Actualizar desde API, o lo que es lo mismo, vamos a la dirección:
 
 ```
-Da un ejemplo
+https://localhost/Countries/Update
 ```
 
-_Y repite_
 
-```
-hasta finalizar
-```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
+
+
 
 ## Ejecutando las pruebas ⚙️
 
